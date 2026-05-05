@@ -8,6 +8,10 @@ This repo is a focused follow-up lab built from the routed portion of a larger G
 
 Instead of burying that inside a broader setup repo, this project keeps the scope tight and evidence-driven.
 
+Social preview asset:
+
+- [assets/social-preview.png](assets/social-preview.png)
+
 ## Start Here
 
 If you only review three things in this repo, use these:
