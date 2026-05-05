@@ -8,6 +8,14 @@ This repo is a focused follow-up lab built from the routed portion of a larger G
 
 Instead of burying that inside a broader setup repo, this project keeps the scope tight and evidence-driven.
 
+## Start Here
+
+If you only review three things in this repo, use these:
+
+1. [04-alpine-router-interface-config.png](images/04-alpine-router-interface-config.png) for the router interfaces and forwarding state
+2. [05-pc1-routed-connectivity.png](images/05-pc1-routed-connectivity.png) for successful cross-subnet communication from the left-side host
+3. [07-pc1-arp-gateway-proof.png](images/07-pc1-arp-gateway-proof.png) for the clearest gateway-versus-destination ARP proof
+
 ## Objective
 
 Demonstrate basic inter-subnet routing in GNS3 by placing two hosts on different IPv4 networks and forwarding traffic between them with a lightweight Linux router.
