@@ -16,8 +16,8 @@ Social preview asset:
 
 If you only review three things in this repo, use these:
 
-1. [04-alpine-router-interface-config.png](images/04-alpine-router-interface-config.png) for the router interfaces and forwarding state
-2. [05-pc1-routed-connectivity.png](images/05-pc1-routed-connectivity.png) for successful cross-subnet communication from the left-side host
+1. [03b-routed-topology-final.png](images/03b-routed-topology-final.png) for the clean two-subnet layout
+2. [04-alpine-router-interface-config.png](images/04-alpine-router-interface-config.png) for the router interfaces and forwarding state
 3. [07-pc1-arp-gateway-proof.png](images/07-pc1-arp-gateway-proof.png) for the clearest gateway-versus-destination ARP proof
 
 ## Objective
@@ -72,11 +72,10 @@ Screenshots are stored in [`images/`](images/).
 1. [01-alpine-router-template-start-command.png](images/01-alpine-router-template-start-command.png) - Alpine router template created in GNS3
 2. [02-cross-compute-link-error.png](images/02-cross-compute-link-error.png) - failed attempt to connect nodes across incompatible compute targets
 3. [03-initial-routing-failure-pc2.png](images/03-initial-routing-failure-pc2.png) - PC2 cannot reach the gateway or remote subnet before the final working state
-4. [04-alpine-router-interface-config.png](images/04-alpine-router-interface-config.png) - router interfaces and forwarding configured
-5. [05-pc1-routed-connectivity.png](images/05-pc1-routed-connectivity.png) - PC1 reaches both its gateway and the remote host
-6. [06-pc2-routed-connectivity.png](images/06-pc2-routed-connectivity.png) - PC2 reaches both its gateway and the remote host
+4. [03b-routed-topology-final.png](images/03b-routed-topology-final.png) - clean final topology showing one router between two IPv4 subnets
+5. [04-alpine-router-interface-config.png](images/04-alpine-router-interface-config.png) - router interfaces and forwarding configured
+6. [05-pc1-routed-connectivity.png](images/05-pc1-routed-connectivity.png) - PC1 reaches both its gateway and the remote host
 7. [07-pc1-arp-gateway-proof.png](images/07-pc1-arp-gateway-proof.png) - PC1 ARP table shows the default gateway MAC for routed traffic
-8. [08-pc2-arp-gateway-proof.png](images/08-pc2-arp-gateway-proof.png) - PC2 ARP table shows the default gateway MAC for routed traffic
 
 ## Lab Steps
 
@@ -106,7 +105,21 @@ Evidence:
 
 - [03-initial-routing-failure-pc2.png](images/03-initial-routing-failure-pc2.png)
 
-### 4. Configure the Linux router
+### 4. Lock in the final topology
+
+Before validating traffic, the topology was reduced to the exact shape needed for the concept:
+
+```text
+PC1 ---- Switch1 ---- AlpineRouter ---- Switch2 ---- PC2
+```
+
+That matters because it keeps the story focused on gateway logic, not on extra GNS3 clutter.
+
+Evidence:
+
+- [03b-routed-topology-final.png](images/03b-routed-topology-final.png)
+
+### 5. Configure the Linux router
 
 The router was configured with one interface in each network and IPv4 forwarding enabled.
 
@@ -124,7 +137,7 @@ Evidence:
 
 - [04-alpine-router-interface-config.png](images/04-alpine-router-interface-config.png)
 
-### 5. Configure endpoint gateways and validate routing
+### 6. Configure endpoint gateways and validate routing
 
 PC1 was configured with:
 
@@ -144,28 +157,22 @@ Successful validation:
 
 - PC1 could ping `192.168.10.1`
 - PC1 could ping `192.168.20.10`
-- PC2 could ping `192.168.20.1`
-- PC2 could ping `192.168.10.10`
 
 TTL in the successful cross-subnet ping dropped to `63`, which is consistent with one routed hop.
 
 Evidence:
 
 - [05-pc1-routed-connectivity.png](images/05-pc1-routed-connectivity.png)
-- [06-pc2-routed-connectivity.png](images/06-pc2-routed-connectivity.png)
 
-### 6. Prove gateway behavior with ARP
+### 7. Prove gateway behavior with ARP
 
 The ARP tables are one of the most useful parts of this lab.
 
 When PC1 sends traffic to a host in another subnet, it does not ARP for the remote host directly. It ARPs for the MAC address of its default gateway instead.
 
-The same is true on PC2 for its side of the network.
-
 Evidence:
 
 - [07-pc1-arp-gateway-proof.png](images/07-pc1-arp-gateway-proof.png)
-- [08-pc2-arp-gateway-proof.png](images/08-pc2-arp-gateway-proof.png)
 
 ## What This Lab Proves
 

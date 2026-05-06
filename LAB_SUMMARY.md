@@ -34,8 +34,7 @@ PC1 ---- Switch1 ---- AlpineRouter ---- Switch2 ---- PC2
 
 ## Best Evidence
 
+- [03b-routed-topology-final.png](images/03b-routed-topology-final.png)
 - [04-alpine-router-interface-config.png](images/04-alpine-router-interface-config.png)
 - [05-pc1-routed-connectivity.png](images/05-pc1-routed-connectivity.png)
-- [06-pc2-routed-connectivity.png](images/06-pc2-routed-connectivity.png)
 - [07-pc1-arp-gateway-proof.png](images/07-pc1-arp-gateway-proof.png)
-- [08-pc2-arp-gateway-proof.png](images/08-pc2-arp-gateway-proof.png)
